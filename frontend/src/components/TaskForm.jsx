@@ -12,26 +12,24 @@ const TaskForm = () => {
     store.subscribe(() => {
       console.log(store.getState());
     });
-  }, [])
+  }, []);
 
-  
-
-  const handleAddTask = (e) => {
-    e.preventDefault();
+  function handleAddTask(event) {
+    event.preventDefault();
     dispatch(addTask(task));
     setTask("");
-  };
+  }
 
-  const handleRemoveTask = (id) => {
+  function handleRemoveTask(id) {
     dispatch(removeTask({ id}));
   };
 
-  const handleCompletedTask = (id) => {
+  function handleCompletedTask(id) {
     dispatch(completedTask({ id }));
   };
 
   return (
-    <>
+    <div>
       <div className="container">
         <h1>Teste Redux - Tarefas</h1>
         <form onSubmit={handleAddTask}>
@@ -42,21 +40,17 @@ const TaskForm = () => {
           />
           <button type="submit">Adicionar</button>
         </form>
-        {store.getState().map((task, index) => (
-          <div key={index}>
-            <h3>
-              {task.id} - {task.task}
-              <button onClick={() => handleRemoveTask(task.id)}>
-                Remover
-              </button>
+          {store.getState().tasks.map((task) => (
+            <div key={task.id}>
+              <h2>{task.task}</h2>
+              <button onClick={() => handleRemoveTask(task.id)}>Remover</button>
               <button onClick={() => handleCompletedTask(task.id)}>
-                Completar
+                Concluir
               </button>
-            </h3>
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
-    </>
+    </div>
   );
 };
 
