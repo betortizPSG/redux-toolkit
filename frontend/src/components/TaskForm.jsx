@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import store from "../store/store";
+import store from "../store/configureStore";
 import { useDispatch } from "react-redux";
-import { addTask, removeTask, completedTask } from "../store/task/action";
+import { addTask, removeTask, completedTask } from "../store/task/tasks";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
